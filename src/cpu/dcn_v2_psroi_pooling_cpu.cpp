@@ -183,7 +183,7 @@ void DeformablePSROIPoolBackwardAccKernelCpu(
     T roi_start_h = static_cast<T>(round(offset_bottom_rois[2])) * spatial_scale - 0.5;
     T roi_end_w = static_cast<T>(round(offset_bottom_rois[3]) + 1.) * spatial_scale - 0.5;
     T roi_end_h = static_cast<T>(round(offset_bottom_rois[4]) + 1.) * spatial_scale - 0.5;
-    
+
     // Force too small ROIs to be 1x1
     T roi_width = std::max(roi_end_w - roi_start_w, T(0.1)); //avoid 0
     T roi_height = std::max(roi_end_h - roi_start_h, T(0.1));
@@ -292,7 +292,7 @@ dcn_v2_psroi_pooling_cpu_forward(const at::Tensor &input,
   AT_ASSERTM(bbox.type().is_cuda(), "rois must be a CUDA tensor");
   AT_ASSERTM(trans.type().is_cuda(), "trans must be a CUDA tensor");*/
 
-  const int batch = input.size(0);
+//  const int batch = input.size(0);
   const int channels = input.size(1);
   const int height = input.size(2);
   const int width = input.size(3);
@@ -321,17 +321,17 @@ dcn_v2_psroi_pooling_cpu_forward(const at::Tensor &input,
   /*dim3 grid(std::min(THCCeilDiv(out_size, 512L), 4096L));
   dim3 block(512);*/
 
-  AT_DISPATCH_FLOATING_TYPES(input.type(), "dcn_v2_psroi_pooling_cpu_forward", [&] {
+  AT_DISPATCH_FLOATING_TYPES(input.scalar_type(), "dcn_v2_psroi_pooling_cpu_forward", [&] {
     DeformablePSROIPoolForwardKernelCpu<scalar_t>(
         out_size,
-        input.contiguous().data<scalar_t>(),
+        input.contiguous().data_ptr<scalar_t>(),
         spatial_scale,
         channels,
         height, width,
         pooled_height,
         pooled_width,
-        bbox.contiguous().data<scalar_t>(),
-        trans.contiguous().data<scalar_t>(),
+        bbox.contiguous().data_ptr<scalar_t>(),
+        trans.contiguous().data_ptr<scalar_t>(),
         no_trans,
         trans_std,
         sample_per_part,
@@ -340,8 +340,8 @@ dcn_v2_psroi_pooling_cpu_forward(const at::Tensor &input,
         part_size,
         num_classes,
         channels_each_class,
-        out.data<scalar_t>(),
-        top_count.data<scalar_t>());
+        out.data_ptr<scalar_t>(),
+        top_count.data_ptr<scalar_t>());
   });
   //THCudaCheck(cudaGetLastError());
   return std::make_tuple(out, top_count);
@@ -395,11 +395,11 @@ dcn_v2_psroi_pooling_cpu_backward(const at::Tensor &out_grad,
   dim3 block(512);
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();*/
 
-  AT_DISPATCH_FLOATING_TYPES(out_grad.type(), "dcn_v2_psroi_pooling_cpu_backward", [&] {
+  AT_DISPATCH_FLOATING_TYPES(out_grad.scalar_type(), "dcn_v2_psroi_pooling_cpu_backward", [&] {
     DeformablePSROIPoolBackwardAccKernelCpu<scalar_t>(
         out_size,
-        out_grad.contiguous().data<scalar_t>(),
-        top_count.contiguous().data<scalar_t>(),
+        out_grad.contiguous().data_ptr<scalar_t>(),
+        top_count.contiguous().data_ptr<scalar_t>(),
         num_bbox,
         spatial_scale,
         channels,
@@ -408,11 +408,11 @@ dcn_v2_psroi_pooling_cpu_backward(const at::Tensor &out_grad,
         pooled_height,
         pooled_width,
         output_dim,
-        input_grad.contiguous().data<scalar_t>(),
-        trans_grad.contiguous().data<scalar_t>(),
-        input.contiguous().data<scalar_t>(),
-        bbox.contiguous().data<scalar_t>(),
-        trans.contiguous().data<scalar_t>(),
+        input_grad.contiguous().data_ptr<scalar_t>(),
+        trans_grad.contiguous().data_ptr<scalar_t>(),
+        input.contiguous().data_ptr<scalar_t>(),
+        bbox.contiguous().data_ptr<scalar_t>(),
+        trans.contiguous().data_ptr<scalar_t>(),
         no_trans,
         trans_std,
         sample_per_part,

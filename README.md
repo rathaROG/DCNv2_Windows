@@ -1,28 +1,26 @@
-## Deformable Convolutional Networks V2 with Pytorch 1.X
+## DCN V2 with Pytorch 1.8 for Windows
 
-### Build
-```bash
-    ./make.sh         # build
-    python testcpu.py    # run examples and gradient check on cpu
-    python testcuda.py   # run examples and gradient check on gpu 
+- Made for Windows (10) 
+- Tested & worked with **cuda 11.1.1** & **pytorch 1.8.0** 
+
+
+### Important
+
+Make sure you already added the correct path of 'cl.exe' of VS2019 in system path variable before run the `make.bat`. For example, the path of VS2019 Enterprise: 
 ```
-### Note
-Now the master branch is for pytorch 1.x, you can switch back to pytorch 0.4 with,
-```bash
-git checkout pytorch_0.4
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.28.29910\bin\Hostx64\x64\
 ```
 
-### Known Issues:
+### Clone & Build
+```
+git clone https://github.com/rathaROG/DCNv2_Windows.git DCNv2
+cd DCNv2
+make.bat
+```
+<img src="https://raw.githubusercontent.com/rathaROG/screenshot/master/DCNv2_Windows/dcn_01.PNG" width="750"/>
+<img src="https://raw.githubusercontent.com/rathaROG/screenshot/master/DCNv2_Windows/dcn_02.PNG" width="750"/>
 
-- [x] Gradient check w.r.t offset (solved)
-- [ ] Backward is not reentrant (minor)
-
-This is an adaption of the official [Deformable-ConvNets](https://github.com/msracver/Deformable-ConvNets/tree/master/DCNv2_op).
-
-Update: all gradient check passes with **double** precision. 
-
-Another issue is that it raises `RuntimeError: Backward is not reentrant`. However, the error is very small (`<1e-7` for 
-float `<1e-15` for double), 
-so it may not be a serious problem (?)
-
-Please post an issue or PR if you have any comments.
+### Credit to [origin repo](https://github.com/CharlesShang/DCNv2) & special thanks to:
+- https://github.com/tteepe/DCNv2
+- @[daiKratos](https://github.com/daiKratos)
+- @[haruishi43](https://github.com/haruishi43)
