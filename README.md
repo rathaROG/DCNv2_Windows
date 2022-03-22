@@ -1,4 +1,4 @@
-## DCN V2 with Pytorch 1.10- for Windows
+## DCN V2 with PyTorch 1.10.x & earlier
 
 - Made for Windows (10/11) 
 - Only works with **PyTorch 1.10.x and earlier**
