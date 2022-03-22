@@ -1,8 +1,8 @@
 ## DCN V2 PyTorch 1.11+
 
 - Made for Windows (10/11) 
-- Only works with **PyTorch 1.11+ (And new?)**
-- Changes were made according to [65472](https://github.com/pytorch/pytorch/pull/65472) [65492](https://github.com/pytorch/pytorch/pull/65492) [66391](https://github.com/pytorch/pytorch/pull/66391) and [69041](https://github.com/pytorch/pytorch/pull/69041)
+- Only works with **PyTorch 1.11+ (And newer?)**
+- Changes were made according to [65472](https://github.com/pytorch/pytorch/pull/65472), [65492](https://github.com/pytorch/pytorch/pull/65492), [66391](https://github.com/pytorch/pytorch/pull/66391), and [69041](https://github.com/pytorch/pytorch/pull/69041)
 
 **Note: Checkout master instead if you use PyTorch 1.10.x or earlier.**
 
