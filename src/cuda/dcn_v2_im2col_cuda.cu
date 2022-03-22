@@ -6,9 +6,16 @@
 #include <ATen/ATen.h>
 #include <ATen/cuda/CUDAContext.h>
 
-#include <THC/THC.h>
-#include <THC/THCAtomics.cuh>
-#include <THC/THCDeviceUtils.cuh>
+// #include <THC/THC.h>
+// #include <THC/THCAtomics.cuh>
+// #include <THC/THCDeviceUtils.cuh>
+
+// For pytorch 1.11+ 
+// https://github.com/pytorch/pytorch/pull/65472 
+// https://github.com/pytorch/pytorch/pull/66391
+// https://github.com/pytorch/pytorch/pull/65492 
+// MOD by rathaROG 22/03/2022
+
 
 #define CUDA_KERNEL_LOOP(i, n)                          \
   for (int i = blockIdx.x * blockDim.x + threadIdx.x;   \
