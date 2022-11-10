@@ -1,13 +1,13 @@
 ## DCN V2 PyTorch 1.10.x & earlier
 
 - Made for Windows (10/11) 
-- Only works with **PyTorch 1.10.x and earlier**
+- Only works with **PyTorch 1.10.x and older**
 - Be noted that the official build of PyTorch 1.10.2 also supports **cuda 11.3.x** which means everything will work on your latest NVIDIA graphic card(s). You can install by using this: 
 ```
 pip install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio===0.10.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-**Note: Checkout tree "[PyTorch-1.11+](https://github.com/rathaROG/DCNv2_Windows/tree/PyTorch-1.11+)" for PyTorch 1.11+**
+**Note: Checkout branch [`PyTorch-1.11+`](https://github.com/rathaROG/DCNv2_Windows/tree/PyTorch-1.11+) for PyTorch 1.11+**
 
 
 ### Important
