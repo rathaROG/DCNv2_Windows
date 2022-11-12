@@ -19,7 +19,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.
 
 ### Clone & Build
 ```
-git clone https://github.com/rathaROG/DCNv2_Windows.git DCNv2
+git clone --single-branch --branch "PyTorch-1.10" https://github.com/rathaROG/DCNv2_Windows.git DCNv2
 cd DCNv2
 make.bat
 ```
