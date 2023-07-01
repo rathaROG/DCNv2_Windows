@@ -6,7 +6,7 @@
 
 ## Clone & Build
 
-* Clone: 
+* Clone as `DCNv2`: 
     ```
     git clone --single-branch --branch "torch-1.11+" https://github.com/rathaROG/DCNv2_Windows.git DCNv2
     ```
