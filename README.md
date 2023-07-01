@@ -1,6 +1,7 @@
 # DCN v2 - PyTorch v1.11+ and v2+
 
-* Made for Windows (10/11)
+* Deformable Convolutional Networks V2 [[Original Repo]](https://github.com/CharlesShang/DCNv2)
+* This repo is customized for Microsoft Windows 10/11
 * Changes were made based on [65472](https://github.com/pytorch/pytorch/pull/65472), [65492](https://github.com/pytorch/pytorch/pull/65492), [66391](https://github.com/pytorch/pytorch/pull/66391), and [69041](https://github.com/pytorch/pytorch/pull/69041)
 * ⚠️ ***Checkout [`torch-legacy`](https://github.com/rathaROG/DCNv2_Windows/tree/torch-legacy) for PyTorch 1.10.x or older***.
 
