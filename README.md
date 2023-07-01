@@ -34,7 +34,7 @@
     Build DCNv2 `_ext`:
     ```
     cd DCNv2
-    make_develop.bat
+    make_old.bat
     ```
     </details>
 
