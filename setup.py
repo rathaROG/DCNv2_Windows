@@ -2,17 +2,9 @@
 
 import os
 import glob
-
 import torch
-
-from torch.utils.cpp_extension import CUDA_HOME
-from torch.utils.cpp_extension import CppExtension
-from torch.utils.cpp_extension import CUDAExtension
-
-from setuptools import find_packages
-from setuptools import setup
-
-requirements = ["torch", "torchvision"]
+from torch.utils.cpp_extension import CUDA_HOME, CppExtension, CUDAExtension
+from setuptools import setup, find_packages
 
 
 def get_extensions():
@@ -41,7 +33,8 @@ def get_extensions():
             "-D__CUDA_NO_HALF2_OPERATORS__",
         ]
     else:
-        #raise NotImplementedError('Cuda is not available')
+        print('PyTorch CUDA is not available')
+        #raise NotImplementedError('PyTorch CUDA is not available')
         pass
     
 
@@ -60,12 +53,13 @@ def get_extensions():
 
 setup(
     name="DCNv2",
-    version="0.1",
+    version="0.1.1",
     author="charlesshang",
-    url="https://github.com/charlesshang/DCNv2",
-    description="deformable convolutional networks",
+    maintainer='rathaROG',
+    url="https://github.com/rathaROG/DCNv2_Windows",
+    description="Deformable convolutional networks.",
     packages=find_packages(exclude=("configs", "tests",)),
-    # install_requires=requirements,
+    # install_requires=["torch", "torchvision"],
     ext_modules=get_extensions(),
     cmdclass={"build_ext": torch.utils.cpp_extension.BuildExtension},
 )
