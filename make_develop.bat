@@ -1,4 +1,4 @@
-:: Wrote by rathaROG July 01, 2023
+:: Updated by rathaROG on July 03, 2024
 @ECHO OFF
 SETLOCAL enabledelayedexpansion
 ECHO =============================================================================
@@ -9,6 +9,9 @@ SET "vs_root_dir=C:\Program Files (x86)\Microsoft Visual Studio\"
 SET "vc_dir=NAN"
 SET "year=NAN"
 SET "edition=NAN"
+IF EXIST "C:\Program Files\Microsoft Visual Studio\" (
+    SET "vs_root_dir=C:\Program Files\Microsoft Visual Studio\"
+)
 IF NOT EXIST "%vs_root_dir%" (
     ECHO Could not find your Microsoft Visual Studio!
     ECHO. 
@@ -17,6 +20,7 @@ IF NOT EXIST "%vs_root_dir%" (
     IF EXIST "%vs_root_dir%2017\" SET "year=2017"
     IF EXIST "%vs_root_dir%2019\" SET "year=2019"
     IF EXIST "%vs_root_dir%2022\" SET "year=2022"
+    IF EXIST "%vs_root_dir%2024\" SET "year=2024"
 )
 SET "year=!year!"
 IF "%year%" EQU NAN (
@@ -30,7 +34,7 @@ IF "%year%" EQU NAN (
 )
 SET "edition=!edition!"
 SET "vc_dir=%vs_root_dir%%year%\%edition%\VC\Auxiliary\Build\"
-IF "%vc_dir%" EQU NAN (
+IF NOT EXIST "%vc_dir%" (
     ECHO -----------------------------------------------------------------------------
     ECHO Could not find Microsoft Visual Studio C++ compiler!
     ECHO Now let's set it manually!
@@ -39,7 +43,7 @@ IF "%vc_dir%" EQU NAN (
 ) ELSE (
     ECHO -----------------------------------------------------------------------------
     ECHO Found Microsoft Visual Studio C++ compiler:
-    ECHO Microsoft Visual Studio %year% %edition% %PROCESSOR_ARCHITECTURE%
+    ECHO Microsoft Visual Studio %year% %edition% %processor_architecture%
     ECHO -----------------------------------------------------------------------------
     GOTO BUIDNOW
 )
@@ -48,16 +52,16 @@ ECHO Manually set your VS C++ compiler:
 :SETVS
 ECHO.
 ECHO Set ROOT=YOUR_PATH\Microsoft Visual Studio
-ECHO Press 'Enter' to set ROOT=C:\Program Files (x86)\Microsoft Visual Studio\
+ECHO Or press 'Enter' to set ROOT=C:\Program Files (x86)\Microsoft Visual Studio\
 SET /P "vs_root_dir=ROOT=" || SET "vs_root_dir=C:\Program Files (x86)\Microsoft Visual Studio\"
 IF NOT "%vs_root_dir:~-1%"=="\" SET "vs_root_dir=%vs_root_dir%\"
 ECHO.
 ECHO Set YEAR=2017 or YEAR=2019 or YEAR=2022
-ECHO Press 'Enter' to set YEAR=2019
+ECHO Or press 'Enter' to set YEAR=2019
 SET /P "year=YEAR=" || SET "year=2019"
 ECHO. 
 ECHO Set EDITION=Community, or EDITION=Professional, or EDITION=Enterprise
-ECHO Press 'Enter' to set EDITION=Enterprise
+ECHO Or press 'Enter' to set EDITION=Enterprise
 SET /P "edition=EDITION=" || SET "edition=Enterprise"
 ECHO.
 SET "vc_dir=%vs_root_dir%%year%\%edition%\VC\Auxiliary\Build\"
@@ -70,7 +74,7 @@ IF NOT EXIST "%vc_dir%" (
 ) ELSE (
     ECHO -----------------------------------------------------------------------------
     ECHO Found Microsoft Visual Studio C++ compiler:
-    ECHO Microsoft Visual Studio %year% %edition% %PROCESSOR_ARCHITECTURE%
+    ECHO Microsoft Visual Studio %year% %edition% %processor_architecture%
     ECHO -----------------------------------------------------------------------------
     GOTO BUIDNOW
 )
